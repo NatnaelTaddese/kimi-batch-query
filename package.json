@@ -12,6 +12,7 @@
     "db:push": "bun run db:generate && bun run db:migrate"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.2",
     "@ai-sdk/react": "^3.0.5",
     "@base-ui/react": "^1.0.0",
     "@neondatabase/serverless": "^1.0.2",
