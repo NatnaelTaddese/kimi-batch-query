@@ -25,12 +25,12 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [passwordError, setPasswordError] = useState("");
-  const [authError, setAuthError] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   return (
     <Card className="max-w-md">
       <CardHeader>
-        <CardTitle className="text-lg md:text-xl">Sign In</CardTitle>
+        <CardTitle className="text-lg md:text-xl font-serif">Sign In</CardTitle>
         <CardDescription className="text-xs md:text-sm">
           Enter your email below to login to your account
         </CardDescription>
@@ -134,9 +134,9 @@ export default function SignIn() {
                 } else {
                   setPasswordError("");
                 }
-                setAuthError("");
+                setLoginError("");
               }}
-              className={passwordError ? "border-red-500" : ""}
+              className={passwordError || loginError ? "border-red-500" : ""}
             />
             {passwordError && (
               <p className="text-sm text-red-500">{passwordError}</p>
@@ -153,9 +153,9 @@ export default function SignIn() {
             <Label htmlFor="remember">Remember me</Label>
           </div>
 
-          {authError && (
+          {loginError && (
             <div className="p-3 text-sm text-red-500 bg-red-50 border border-red-200 rounded-md">
-              {authError}
+              {loginError}
             </div>
           )}
 
@@ -164,7 +164,7 @@ export default function SignIn() {
             className="w-full"
             disabled={loading || !!passwordError}
             onClick={async () => {
-              setAuthError("");
+              setLoginError("");
 
               if (password.length < 8) {
                 setPasswordError("Password must be at least 8 characters");
@@ -195,28 +195,26 @@ export default function SignIn() {
                     if (
                       errorMessage.toLowerCase().includes("invalid") ||
                       errorMessage.toLowerCase().includes("incorrect") ||
+                      errorMessage.toLowerCase().includes("not found") ||
                       errorMessage.toLowerCase().includes("wrong")
                     ) {
-                      setAuthError(
+                      setLoginError(
                         "Invalid email or password. Please try again.",
                       );
                       toast.error("Invalid email or password");
                     } else if (
-                      errorMessage.toLowerCase().includes("not found") ||
+                      errorMessage.toLowerCase().includes("not exist") ||
                       errorMessage.toLowerCase().includes("no user") ||
-                      errorMessage.toLowerCase().includes("doesn't exist")
+                      errorMessage.toLowerCase().includes("no account")
                     ) {
-                      setAuthError(
+                      setLoginError(
                         "No account found with this email. Please sign up first.",
                       );
-                      toast.error("Account not found");
+                      toast.error("No account found with this email");
                     } else {
-                      setAuthError(errorMessage);
+                      setLoginError(errorMessage);
                       toast.error(errorMessage);
                     }
-                  },
-                  onSuccess: () => {
-                    toast.success("Successfully logged in!");
                   },
                 },
               );

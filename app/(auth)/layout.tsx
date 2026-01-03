@@ -12,9 +12,7 @@ export default function AuthLayout({
           href="/"
           className="flex items-center gap-2 self-center font-medium"
         >
-          <span className="text-3xl tracking-normal md:text-4xl font-mono">
-            {/**/}
-          </span>
+          <span className="text-4xl tracking-normal md:text-6xl">BQ</span>
         </Link>
         {children}
         <div className="text-center text-xs text-balance text-muted-foreground">
