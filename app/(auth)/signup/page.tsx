@@ -53,7 +53,7 @@ export default function SignUp() {
                 await signIn.social(
                   {
                     provider: "google",
-                    callbackURL: "/home",
+                    callbackURL: "/",
                   },
                   {
                     onRequest: (ctx) => {
@@ -189,7 +189,7 @@ export default function SignUp() {
                 email,
                 password,
                 name: name,
-                callbackURL: "/home",
+                callbackURL: "/",
                 fetchOptions: {
                   onResponse: () => {
                     setLoading(false);
@@ -218,7 +218,7 @@ export default function SignUp() {
                     }
                   },
                   onSuccess: async () => {
-                    router.push("/home");
+                    router.push("/");
                   },
                 },
               });
